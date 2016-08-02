@@ -39,16 +39,16 @@ int main( int argc, char* argv[] ){
     double base_width;
     if(!private_n->getParam("base_width", base_width))
     {
-        ROS_WARN("No base_width provided - default: 0.5m");
-        base_width = 0.5;
+        ROS_WARN("No base_width provided - default: 0.496m");
+        base_width = 0.496;
     }
 
     int ticks_per_meter;
     // nh.param("ticks_per_meter", ticks_per_meter,88000);
     if(!private_n->getParam("ticks_per_meter", ticks_per_meter))
     {
-        ROS_WARN("No ticks_per_meter provided - default: 88000");
-        ticks_per_meter = 88000;
+        ROS_WARN("No ticks_per_meter provided - default: 24298");
+        ticks_per_meter = 24298;
     }
     
     geometry_msgs::TransformStamped odom_transform_msg;
