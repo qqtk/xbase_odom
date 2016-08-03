@@ -114,7 +114,7 @@ int main( int argc, char* argv[] ){
         odom.pose.pose.position.z = 0.0;
         odom.pose.pose.orientation = odom_quat;
         //set the velocity
-        odom.child_frame_id = "base_footprint";
+        odom.child_frame_id = "base_link";
         odom.twist.twist.linear.x = dx;
         odom.twist.twist.linear.y = 0;
         odom.twist.twist.angular.z = dr;
