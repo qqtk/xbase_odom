@@ -9,6 +9,7 @@
 #include "robbase_msg/encoders.h"
 #include <string>
 
+bool valid_first_tick_flag;
 double left_ticks, right_ticks;
 double left_ticks_prev, right_ticks_prev;
 double delta_left_ticks, delta_right_ticks;
@@ -24,6 +25,12 @@ void ticksLR_callback(const robbase_msg::encoders& ticks_msg){
 //    left_ticks = ticks_msg.lwheelticks;
     left_ticks = ticks_msg.ticks_l;
     right_ticks = ticks_msg.ticks_r;
+
+    if (valid_first_tick_flag == false){
+        left_ticks_prev = ticks_msg.ticks_l;
+        right_ticks_prev = ticks_msg.ticks_r;
+        valid_first_tick_flag = true;
+    }
 } 
 //
 int main( int argc, char* argv[] ){
@@ -35,6 +42,7 @@ int main( int argc, char* argv[] ){
     ros::Subscriber ticks_sub = nh.subscribe("/encoder", 20, ticksLR_callback);
     ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("/odom", 20);
     
+    valid_first_tick_flag = false;
     // nh.param("base_width", base_width, 0.5);
     double base_width;
     if(!private_n->getParam("base_width", base_width))
